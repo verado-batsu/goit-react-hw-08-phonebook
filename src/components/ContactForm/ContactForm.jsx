@@ -4,7 +4,7 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 import { FormStyled } from 'components/ContactForm/ContactForm.styled';
 import { schema } from './schema';
-import { addContact } from 'redux/contactsOperations';
+import { addContact } from 'redux/contacts/contactsOperations';
 import { selectContacts } from 'redux/selectors';
 
 export function ContactForm() {

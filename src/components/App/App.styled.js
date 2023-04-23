@@ -1,8 +1,11 @@
 import styled from "@emotion/styled";
 
 export const Container = styled.div`
-	max-width: 300px;	
-	padding: 15px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	max-width: 1200px;
+	padding: 0 15px;
 	h1, h2 {
 		margin-bottom: 20px;
 	}

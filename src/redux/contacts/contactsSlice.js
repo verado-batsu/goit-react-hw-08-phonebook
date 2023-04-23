@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, isAnyOf } from "@reduxjs/toolkit";
 import { addContact, deleteContact, fetchContacts } from "./contactsOperations";
 
 const contactsInitialState = {
@@ -34,16 +34,11 @@ const handleFulfilled = (state, action) => {
 const contactsSlice = createSlice({
 	name: 'contacts',
 	initialState: contactsInitialState,
-	extraReducers: {
-		[fetchContacts.pending]: handlePending,
-		[addContact.pending]: handlePending,
-		[deleteContact.pending]: handlePending,
-		[fetchContacts.rejected]: handleRejected,
-		[addContact.rejected]: handleRejected,
-		[deleteContact.rejected]: handleRejected,
-		[fetchContacts.fulfilled]: handleFulfilled,
-		[addContact.fulfilled]: handleFulfilled,
-		[deleteContact.fulfilled]: handleFulfilled,
+	extraReducers: builder => {
+		builder
+			.addMatcher(isAnyOf(fetchContacts.pending, addContact.pending, deleteContact.pending), handlePending)
+			.addMatcher(isAnyOf(fetchContacts.rejected, addContact.rejected, deleteContact.rejected), handleRejected)
+			.addMatcher(isAnyOf(fetchContacts.fulfilled, addContact.fulfilled, deleteContact.fulfilled), handleFulfilled)
 	}
 })
 

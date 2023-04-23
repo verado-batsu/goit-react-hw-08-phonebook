@@ -1,9 +1,11 @@
 import styled from "@emotion/styled";
 
 export const ContactListEl = styled.ul`
+	padding: 0;
 	li{
 		display: flex;
 		gap: 10px;
+		
 		justify-content: space-between;
 
 		:not(:last-child) {

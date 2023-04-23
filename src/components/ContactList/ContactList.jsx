@@ -1,9 +1,12 @@
-import { ContactListEl } from 'components/ContactList/ContactList.styled';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
-import { deleteContact, fetchContacts } from 'redux/contactsOperations';
+import { ContactListEl } from 'components/ContactList/ContactList.styled';
+import {
+    deleteContact,
+    fetchContacts,
+} from 'redux/contacts/contactsOperations';
 import {
     selectContacts,
     selectError,
