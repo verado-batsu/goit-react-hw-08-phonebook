@@ -1,3 +1,4 @@
+import { Text } from '@chakra-ui/react';
 import { ContactForm } from 'components/ContactForm/ContactForm';
 import { ContactList } from 'components/ContactList/ContactList';
 import { Filter } from 'components/Filter/Filter';
@@ -9,10 +10,10 @@ export function ContactsPage() {
                 minWidth: 400,
             }}
         >
-            <h2>Phonebook</h2>
+            <Text fontSize="3xl">Phonebook</Text>
             <ContactForm />
 
-            <h3>Contacts</h3>
+            <Text fontSize="3xl">Contacts</Text>
             <Filter />
 
             <ContactList />

@@ -1,4 +1,13 @@
-import { Button, Form } from 'react-bootstrap';
+import {
+    Box,
+    Button,
+    Center,
+    FormControl,
+    FormLabel,
+    Input,
+    Text,
+    VStack,
+} from '@chakra-ui/react';
 import { useDispatch } from 'react-redux';
 import { logIn } from 'redux/user/userOperation';
 
@@ -17,27 +26,48 @@ export function LoginPage() {
     }
 
     return (
-        <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Email address</Form.Label>
-                <Form.Control
-                    name="email"
-                    type="email"
-                    placeholder="Enter email"
-                />
-            </Form.Group>
+        <Box
+            border="2px"
+            borderColor="gray.200"
+            bg="white"
+            p={6}
+            rounded="md"
+            w="400px"
+        >
+            <Center>
+                <Text as="b" fontSize="3xl">
+                    Login
+                </Text>
+            </Center>
+            <form onSubmit={handleSubmit}>
+                <VStack spacing={4} align="flex-start">
+                    <FormControl>
+                        <FormLabel>
+                            Email address
+                            <Input
+                                name="email"
+                                type="email"
+                                placeholder="Enter email"
+                            />
+                        </FormLabel>
+                    </FormControl>
 
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control
-                    name="password"
-                    type="password"
-                    placeholder="Password"
-                />
-            </Form.Group>
-            <Button variant="primary" type="submit">
-                Submit
-            </Button>
-        </Form>
+                    <FormControl>
+                        <FormLabel>
+                            Password
+                            <Input
+                                name="password"
+                                type="password"
+                                placeholder="Password"
+                            />
+                        </FormLabel>
+                    </FormControl>
+
+                    <Button colorScheme="purple" type="submit">
+                        Submit
+                    </Button>
+                </VStack>
+            </form>
+        </Box>
     );
 }

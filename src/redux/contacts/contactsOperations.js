@@ -1,5 +1,59 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createApi } from '@reduxjs/toolkit/query/react';
+
+const axiosBaseQuery =
+	({ baseUrl } = { baseUrl: '' }) =>
+	async ({ url, method, data, params }) => {
+		try {
+			const result = await axios({ url: baseUrl + url, method, data, params })
+			return { data: result.data }
+    	} catch (axiosError) {
+      		let err = axiosError
+     		return {
+        		error: {
+					status: err.response?.status,
+					data: err.response?.data || err.message,
+        		},
+      		}
+    	}
+  	}
+
+export const contactsApi = createApi({
+	reducerPath: 'contactsApi',
+	baseQuery: axiosBaseQuery({ baseUrl: 'https://connections-api.herokuapp.com' }),
+	endpoints: (builder) => ({
+		fetchContacts: builder.query({
+			query: () => ({url: '/contacts'}),
+		}),
+		addContact: builder.mutation({
+			query: (contact) => {
+				console.log(contact)
+				return {
+					url: '/contacts',
+					method: 'POST',
+					body: contact,
+				}
+			}
+		}),
+		deleteContact: builder.mutation({
+			query: (id) => {
+				return {
+					url: `/contacts/${id}`,
+					method: 'DELETE'
+				}
+			}
+		}),
+	})
+})
+
+export const {
+	useFetchContactsQuery,
+	useAddContactMutation,
+	useDeleteContactMutation,
+} = contactsApi;
+
+// !====================================================================
 
 async function getContacts() {
 	const response = await axios.get('/contacts');
@@ -34,34 +88,5 @@ export const deleteContact = createAsyncThunk('contacts/deleteContact',
 		}
 })
 
-// export const fetchContacts = () => async dispatch => {
-// 	try {
-// 		dispatch(fetchingInProgress());
-// 		const response = await axios.get('/contacts');
-// 		const contacts = response.data;
-// 		dispatch(fetchingSuccess(contacts));
-// 	} catch (error) {
-// 		dispatch(fetchingError(error.message));
-// 	}
-// }
-
-// export const addContact = (contact) => async dispatch => {
-// 	try {
-// 		await axios.post('/contacts', contact);
-// 		dispatch(fetchContacts());
-// 	} catch (error) {
-// 		dispatch(fetchingError(error.message));
-// 	}
-// }
-
-// export const deleteContact = (id) => async dispatch => {
-// 	try {
-// 		// dispatch(fetchingInProgress());
-// 		await axios.delete(`/contacts/${id}`);
-// 		dispatch(fetchContacts());
-// 	} catch (error) {
-// 		// dispatch(fetchingError(error.message));
-// 	}
-// }
 
 

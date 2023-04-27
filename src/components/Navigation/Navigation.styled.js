@@ -19,7 +19,8 @@ export const Nav = styled.nav`
 		color: black;
 
 		&.active {
-			color: orange;
+			color: #9d22f9;
+			text-decoration: underline;
 		}
 	}
 `;

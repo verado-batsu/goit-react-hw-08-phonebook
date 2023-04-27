@@ -2,7 +2,9 @@ import { Route, Routes } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Container } from 'components/App/App.styled';
+import { Container } from '@chakra-ui/react';
+
+// import { Container } from 'components/App/App.styled';
 import { Navigation } from 'components/Navigation/Navigation';
 
 import { HomePage } from 'pages/Home';
@@ -13,6 +15,7 @@ import { RegisterPage } from 'pages/Register';
 import { fetchCurrentUser } from 'redux/user/userOperation';
 import { userSelector } from 'redux/selectors';
 import { PrivateRoute } from 'components/PrivateRoute';
+import { PublicRoute } from 'components/PublicRoute';
 
 export function App() {
     const dispatch = useDispatch();
@@ -31,12 +34,33 @@ export function App() {
                 <Container>
                     <Routes>
                         <Route path="/" element={<HomePage />} />
-                        <PrivateRoute
+                        <Route
                             path="/contacts"
-                            element={<ContactsPage />}
+                            element={
+                                <PrivateRoute
+                                    to="/login"
+                                    element={<ContactsPage />}
+                                />
+                            }
                         />
-                        <Route path="/login" element={<LoginPage />} />
-                        <Route path="/register" element={<RegisterPage />} />
+                        <Route
+                            path="/login"
+                            element={
+                                <PublicRoute
+                                    to="/contacts"
+                                    element={<LoginPage />}
+                                />
+                            }
+                        />
+                        <Route
+                            path="/register"
+                            element={
+                                <PublicRoute
+                                    to="/contacts"
+                                    element={<RegisterPage />}
+                                />
+                            }
+                        />
                         <Route path="*" element={<NotFound />} />
                     </Routes>
                 </Container>

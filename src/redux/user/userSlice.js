@@ -34,7 +34,13 @@ const userSlice = createSlice({
 				state.isLoggedIn = true;
 				state.isFetchingCurrent = false;
 			})
+			.addCase(fetchCurrentUser.rejected, (state, { payload }) => {
+				state.isFetchingCurrent = false;
+			})
 	}
 })
+
+
+		
 
 export const userReducer = userSlice.reducer;
