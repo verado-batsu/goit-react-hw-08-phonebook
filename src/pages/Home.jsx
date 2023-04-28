@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { Center, Text } from '@chakra-ui/react';
 import { userSelector } from 'redux/selectors';
 
-export function HomePage() {
+export default function HomePage() {
     const isLoggedIn = useSelector(userSelector.selectUserIsLoggedIn);
     return (
         <>

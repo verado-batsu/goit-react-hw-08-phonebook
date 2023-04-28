@@ -11,7 +11,7 @@ import {
 import { useDispatch } from 'react-redux';
 import { logIn } from 'redux/user/userOperation';
 
-export function LoginPage() {
+export default function LoginPage() {
     const dispatch = useDispatch();
 
     function handleSubmit(e) {

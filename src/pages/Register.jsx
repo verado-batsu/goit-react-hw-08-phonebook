@@ -12,7 +12,7 @@ import { useDispatch } from 'react-redux';
 
 import { signUp } from 'redux/user/userOperation';
 
-export function RegisterPage() {
+export default function RegisterPage() {
     const dispatch = useDispatch();
 
     function handleSubmit(e) {

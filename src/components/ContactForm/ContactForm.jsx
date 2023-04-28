@@ -1,5 +1,4 @@
 import { Formik, Field, ErrorMessage, Form } from 'formik';
-import { useDispatch, useSelector } from 'react-redux';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import {
     Box,
@@ -11,20 +10,18 @@ import {
     VStack,
 } from '@chakra-ui/react';
 
-// import { FormStyled } from 'components/ContactForm/ContactForm.styled';
 import { schema } from './schema';
 import {
-    addContact,
     useAddContactMutation,
-} from 'redux/contacts/contactsOperations';
-import { selectContacts } from 'redux/selectors';
+    useFetchContactsQuery,
+} from 'redux/contacts/contactsApi';
 
 export function ContactForm() {
-    const dispatch = useDispatch();
+    const [addContact, { error }] = useAddContactMutation();
 
-    const [addContact, result] = useAddContactMutation();
+    error && Notify.failure(error.data.message);
 
-    const contacts = useSelector(selectContacts);
+    const { data: contacts } = useFetchContactsQuery();
 
     const initialValues = {
         name: '',
@@ -45,7 +42,6 @@ export function ContactForm() {
             return;
         } else {
             addContact(values);
-            // dispatch(addContact(values));
             resetForm();
             return;
         }

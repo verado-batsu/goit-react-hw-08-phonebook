@@ -11,10 +11,9 @@ import {
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
-import { contactsReducer } from "./contacts/contactsSlice";
 import { filterReducer } from "./filterSlice";
 import { userReducer } from "./user/userSlice";
-import { contactsApi } from "./contacts/contactsOperations";
+import { contactsApi } from "./contacts/contactsApi";
 
 const persistConfigUser = {
 	key: 'user',
@@ -27,7 +26,6 @@ const persistedUser = persistReducer(persistConfigUser, userReducer)
 export const store = configureStore({
 	reducer: {
 		user: persistedUser,
-		contacts: contactsReducer,
 		filter: filterReducer,
 		[contactsApi.reducerPath]: contactsApi.reducer,
 	},
