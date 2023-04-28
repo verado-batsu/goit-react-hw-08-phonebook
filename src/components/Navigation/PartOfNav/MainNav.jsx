@@ -7,11 +7,11 @@ export function MainNav() {
     const isLoggedIn = useSelector(userSelector.selectUserIsLoggedIn);
     return (
         <div>
-            <Link as={ReachLink} to="/">
+            <Link fontSize="xl" as={ReachLink} to="/">
                 Home
             </Link>
             {isLoggedIn && (
-                <Link as={ReachLink} to="/contacts">
+                <Link fontSize="xl" as={ReachLink} to="/contacts">
                     Contacts
                 </Link>
             )}

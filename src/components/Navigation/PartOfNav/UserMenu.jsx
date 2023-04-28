@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { Button } from '@chakra-ui/react';
+import { Button, Text } from '@chakra-ui/react';
 
 import { userSelector } from 'redux/selectors';
 import { logOut } from 'redux/user/userOperation';
@@ -14,8 +14,9 @@ export function UserMenu() {
 
     return (
         <div>
-            <p>{name && name}</p>
+            <Text fontSize="xl">{name && name}</Text>
             <Button
+                fontSize="md"
                 colorScheme="red"
                 variant="outline"
                 size="sm"

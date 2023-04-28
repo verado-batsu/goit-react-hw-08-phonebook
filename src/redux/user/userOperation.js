@@ -19,7 +19,7 @@ export const signUp = createAsyncThunk('user/signUp', async (user, thunkAPI) => 
 		token.setAuth(data.token);
 		return data;
 	} catch (error) {
-		Notify.failure(error.response.data.message);
+		Notify.failure(error.response.data.message || "The email address is already registered");
 		return thunkAPI.rejectWithValue(error.message);
 	}
 })
@@ -30,6 +30,7 @@ export const logIn = createAsyncThunk('user/login', async (user, thunkAPI) => {
 		token.setAuth(data.token);
 		return data;
 	} catch (error) {
+		Notify.failure("Something went wrong. Сheck that the entered email and password are correct");
 		return thunkAPI.rejectWithValue(error.message);
 	}
 })

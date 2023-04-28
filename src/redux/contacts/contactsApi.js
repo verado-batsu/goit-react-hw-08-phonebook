@@ -16,7 +16,8 @@ const axiosBaseQuery =
         		},
       		}
     	}
-  	}
+	}
+
 
 export const contactsApi = createApi({
 	reducerPath: 'contactsApi',
@@ -46,6 +47,13 @@ export const contactsApi = createApi({
 			},
 			invalidatesTags: ['Contacts'],
 		}),
+		fetchCurrentUser: builder.mutation({
+			query: () => ({
+				url: '/users/current',
+				method: 'GET'
+			}),
+			invalidatesTags: ['Contacts'],
+		}),
 	}),
 })
 
@@ -53,6 +61,7 @@ export const {
 	useFetchContactsQuery,
 	useAddContactMutation,
 	useDeleteContactMutation,
+	useFetchCurrentUserMutation,
 } = contactsApi;
 
 
